@@ -1,0 +1,59 @@
+{{ define "content" }}
+<div class="jumbotron py-5 text-center bg-light rounded">
+    <h1 class="display-4">Welcome to LinkCollector</h1>
+    <p class="lead">Save and share your useful links with the world!</p>
+    <p>{{ .content }}</p>
+    {{ if not .userID }}
+    <hr class="my-4">
+    <p>Create an account to start saving your favorite links.</p>
+    <a class="btn btn-primary btn-lg" href="/register" role="button">Join Now</a>
+    {{ else }}
+    <a class="btn btn-primary btn-lg mt-3" href="/links/add" role="button">Add New Link</a>
+    {{ end }}
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-8 offset-md-2">
+        <h2 class="mb-4">{{ if .userID }}Your Recent{{ else }}Recent{{ end }} Links</h2>
+        
+        {{ if .recentLinks }}
+            {{ range .recentLinks }}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ .Title }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        <a href="{{ .URL }}" target="_blank">{{ .URL }}</a>
+                    </h6>
+                    <p class="card-text">{{ .Description }}</p>
+                    
+                    {{ if .Tags }}
+                    <div class="tags mb-2">
+                        {{ range .Tags }}
+                        <span class="badge bg-secondary">{{ . }}</span>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                    
+                    <div class="text-muted small">Added on {{ .CreatedAt.Format "Jan 02, 2006" }}</div>
+                    
+                    {{ if $.userID }}
+                    <div class="mt-2">
+                        <a href="/links/{{ .ID }}" class="card-link">View</a>
+                        <a href="/links/{{ .ID }}/edit" class="card-link">Edit</a>
+                    </div>
+                    {{ end }}
+                </div>
+            </div>
+            {{ end }}
+        {{ else }}
+            <div class="alert alert-info">
+                {{ if .userID }}
+                You haven't saved any links yet. <a href="/links/add">Add your first link</a>!
+                {{ else }}
+                No links have been added yet.
+                {{ end }}
+            </div>
+        {{ end }}
+    </div>
+</div>
+{{ end }} 

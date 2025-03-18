@@ -1,0 +1,27 @@
+[Unit]
+Description=LinkCollector - Web Application for Saving and Sharing Links
+After=network.target mysql.service
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/var/www/linkcollector
+ExecStart=/var/www/linkcollector/linkcollector
+Restart=on-failure
+RestartSec=5
+
+# Environment variables for MySQL connection
+# Replace these with your actual Strato MySQL credentials
+Environment=DB_USER=your_strato_db_user
+Environment=DB_PASSWORD=your_strato_db_password
+Environment=DB_HOST=your_strato_db_host
+Environment=DB_PORT=3306
+Environment=DB_NAME=your_strato_db_name
+Environment=SESSION_SECRET=your-secure-session-key
+
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=linkcollector
+
+[Install]
+WantedBy=multi-user.target 

@@ -1,0 +1,97 @@
+/* LinkCollector Custom CSS */
+
+/* Custom branding color scheme */
+:root {
+    --primary-color: #4a6da7;
+    --secondary-color: #5a8cce;
+    --accent-color: #2c3e50;
+    --light-bg: #f8f9fa;
+}
+
+/* Override Bootstrap primary color */
+.btn-primary, .bg-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Link styling */
+a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* Card hover effect */
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: 1.5rem;
+}
+
+/* Disable this for now - feels a bit too much 
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+*/
+
+/* Tag styling */
+.badge {
+    font-weight: 500;
+    font-size: 0.75rem;
+    margin-right: 0.5rem;
+    padding: 0.35em 0.6em;
+}
+
+/* Footer styling */
+.footer {
+    margin-top: 5rem;
+    padding: 1.5rem 0;
+}
+
+/* Custom styles for jumbotron since Bootstrap 5 removed it */
+.jumbotron {
+    padding: 3rem 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Custom navbar style */
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Some custom link card styling */
+.link-card .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* Media query for better mobile experience */
+@media (max-width: 576px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .jumbotron {
+        padding: 2rem 1rem;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+} 

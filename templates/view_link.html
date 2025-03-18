@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .title }}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="/">LinkCollector</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/links/add">Add Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/search">Search</a>
+                    </li>
+                </ul>
+                <div class="navbar-nav">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h3>{{ .link.Title }}</h3>
+                        <div>
+                            <a href="/links/{{ .link.ID }}/edit" class="btn btn-sm btn-outline-secondary">Edit</a>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <h5>URL</h5>
+                            <p><a href="{{ .link.URL }}" target="_blank" class="link-primary">{{ .link.URL }}</a></p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5>Description</h5>
+                            <p>{{ if .link.Description }}{{ .link.Description }}{{ else }}<span class="text-muted">No description provided</span>{{ end }}</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5>Tags</h5>
+                            <div>
+                                {{ if .link.Tags }}
+                                    {{ range .link.Tags }}
+                                    <span class="badge bg-secondary me-1">{{ . }}</span>
+                                    {{ end }}
+                                {{ else }}
+                                    <span class="text-muted">No tags</span>
+                                {{ end }}
+                            </div>
+                        </div>
+                        
+                        <div class="text-muted">
+                            Added on {{ .link.CreatedAt.Format "January 2, 2006 at 3:04 PM" }}
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/dashboard" class="btn btn-outline-secondary">Back to Dashboard</a>
+                        
+                        <!-- Maybe add share button here in the future -->
+                        <!-- <a href="#" class="btn btn-outline-primary">Share Link</a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Delete Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirm Delete</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete the link "{{ .link.Title }}"?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <form action="/links/{{ .link.ID }}/delete" method="POST">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer mt-5 py-3 bg-light">
+        <div class="container text-center">
+            <span class="text-muted">Made with love and pain in 2025</span>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/script.js"></script>
+</body>
+</html> 
