@@ -12,7 +12,12 @@ LinkCollector is a simple web application that allows users to save, organize an
 
 ## Screenshot
 
-(Add screenshots once deployed)
+![image](https://github.com/user-attachments/assets/40ad3fff-b065-43d4-88f0-c487f910198c)
+![image](https://github.com/user-attachments/assets/819de5a4-e5fc-43cd-b2a7-873a99d1b650)
+![image](https://github.com/user-attachments/assets/8a483e89-27b7-460f-8fd3-4061919265bd)
+![image](https://github.com/user-attachments/assets/135c8514-8892-4d30-b519-3aa17d38b090)
+
+
 
 ## Installation
 
